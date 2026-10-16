@@ -1,0 +1,2 @@
+# Edge / Nvidia Jetson
+This module contains the source code for the edge device, which is to receive the video stream from the drone / drone controller (TBD), run inference, and publish results to backend.
