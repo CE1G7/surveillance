@@ -9,7 +9,7 @@ class Worker:
         self.eventmanager = eventmanager
         self.thread = threading.Thread(target=self._run)
         self._stop = threading.Event()
-        
+
     def start(self):
         self.thread.start()
 
@@ -21,3 +21,4 @@ class Worker:
         while not self._stop.is_set():
             frame = self.framebuffer.get_frame()
             res = self.recognizer.recognize(frame)
+            print(res)
