@@ -17,7 +17,7 @@ class Worker:
         self._stop.set()
         self.thread.join()
 
-    def run(self):
+    def _run(self):
         while not self._stop.is_set():
             frame = self.framebuffer.get_frame()
             res = self.recognizer.recognize(frame)

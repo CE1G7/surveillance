@@ -10,13 +10,3 @@ class Recognize:
         im = cv2.imread(frame)
         results = self.model.predict(source=im, save=True)
         return results
-
-
-def main():
-    r = Recognize()
-    res = r.recognize()
-    print(f"Result: {res}")
-
-
-if __name__ == "__main__":
-    main()

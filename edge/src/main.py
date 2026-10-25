@@ -8,5 +8,7 @@ def main():
     event_manager = EventManager()
     worker = Worker(recognizer=recognizer,framebuffer=frame_buffer, eventmanager=event_manager)
     worker.start()
+    
+
 if __name__ == "__main__":
     main()
