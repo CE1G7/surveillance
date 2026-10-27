@@ -1,7 +1,6 @@
 from ultralytics import YOLO
 import cv2
 import numpy as np
-from framebuffer import FrameBuffer
 class Recognize:
     def __init__(self):
         self.model = YOLO("models/yolo26m.pt") #model fetched from huggingface
