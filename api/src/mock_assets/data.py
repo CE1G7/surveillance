@@ -14,7 +14,7 @@ from src.schemas import (
     Zone,
 )
 
-ASSETS = Path(__file__).parent / "mock_assets"
+ASSETS = Path(__file__).parent
 
 
 def t(value: str) -> datetime:
