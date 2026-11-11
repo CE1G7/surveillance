@@ -1,4 +1,8 @@
-FROM python:3-slim
+FROM python:3.12
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libgl1 libglib2.0-0 \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /usr/src/app
 
@@ -7,4 +11,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-CMD [ "python", "./main.py" ]
+EXPOSE 1935
+
+CMD[ "python", "./main.py" ]
