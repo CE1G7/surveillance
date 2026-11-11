@@ -7,4 +7,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-CMD [ "python", "./main.py" ]
+EXPOSE 1935
+
+CMD[ "python", "./main.py" ]
