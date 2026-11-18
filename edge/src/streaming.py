@@ -14,6 +14,7 @@ class RTMPServer:
     def __init__(self, framebuffer: FrameBuffer, url: str = "rtmp://0.0.0.0:1935/live/stream"):
         self.framebuffer = framebuffer
         self.url = url
+        self.fps = None
         self.thread = threading.Thread(target=self.run, daemon=True)
         self._stop = threading.Event()
 
@@ -28,6 +29,7 @@ class RTMPServer:
         # Re-listen after a publisher disconnects or the open times out (~30s with no publisher).
         while not self._stop.is_set():
             cap = cv2.VideoCapture(self.url, cv2.CAP_FFMPEG)
+            self.fps = cap.get(cv2.CAP_PROP_FPS)
             while cap.isOpened() and not self._stop.is_set():
                 ok, frame = cap.read()
                 if not ok:

@@ -1,7 +1,9 @@
 from inference import Recognize
 from framebuffer import FrameBuffer
 from EventManager import EventManager
+from framebuffer import Frame
 import threading
+import requests
 import cv2
 class Worker:
     def __init__(self,recognizer: Recognize, framebuffer: FrameBuffer, eventmanager: EventManager):
@@ -25,10 +27,6 @@ class Worker:
             if frame is None:  # no stream connected yet
                 self._stop.wait(0.1)
                 continue
-            res = self.recognizer.recognize(frame)
-            print(res)
-            # plot() draws boxes + labels onto a copy of the frame with OpenCV; all highgui calls stay in this thread.
-            cv2.imshow("edge", res[0].plot())
-            if cv2.waitKey(1) & 0xFF == ord("q"):
-                self._stop.set()
-        cv2.destroyAllWindows()
+            res = self.recognizer.recognize(frame.image)
+            if(res):
+                self.framebuffer.get_clip(frame)
