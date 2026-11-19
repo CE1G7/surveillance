@@ -2,7 +2,7 @@ import numpy as np
 import cv2
 from collections import deque
 from itertools import islice
-# Implemented as a queue of 1 depth for now
+import uuid
 class Frame:
     def __init__(self,id,image):
         self.id = id
@@ -15,7 +15,8 @@ class FrameBuffer:
         self.ite = -1
         self.fps = fps
 
-    def set_frame(self,frame_in: np.ndarray):
+    def set_frame(self,frame_in: np.ndarray,fps):
+        self.fps = fps
         self.ite +=1
         self.current_frame = Frame(self.ite,frame_in)
         self.buffer.appendleft(cv2.imencode(".jpg",frame_in)[1])
@@ -24,7 +25,7 @@ class FrameBuffer:
         return self.current_frame
 
     def get_clip(self,frame: Frame, length: int):
-        frames = len*self.fps
+        frames = int(length*self.fps)
         buffer_len = len(self.buffer)
         diff = self.ite - frame.id
         index_end_clip = diff
@@ -40,7 +41,8 @@ class FrameBuffer:
         for frame in frames:
             decoded.append(cv2.imdecode(frame,cv2.IMREAD_COLOR))
         h, w = decoded[0].shape[:2]
-        out = cv2.VideoWriter("out.mp4", cv2.VideoWriter_fourcc(*"mp4v"), self.fps, (w, h))
+        clip_id = uuid.uuid4()
+        out = cv2.VideoWriter(f"clip-{clip_id}.mp4", cv2.VideoWriter_fourcc(*"mp4v"), self.fps, (w, h))
         for d in decoded:
             out.write(d)
         out.release()

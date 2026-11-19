@@ -27,6 +27,7 @@ class Worker:
             res = self.recognizer.recognize(frame.image)
             if(res):
                 print("detection")
-                self.framebuffer.get_clip(frame,2)
+                print(res[0])
+                #self.framebuffer.get_clip(frame,2)
             else:
                 print("No result")
