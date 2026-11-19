@@ -92,7 +92,7 @@ def start_ffmpeg(url: str, width: int, height: int, fps: int) -> subprocess.Pope
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("folder", type=Path, help="folder containing images and/or videos")
-    parser.add_argument("--url", default="rtmp://192.168.68.61:1935/live/stream")
+    parser.add_argument("--url", default="rtmp://localhost:1935/live/stream")
     parser.add_argument("--seconds", type=float, default=2.0, help="time each image is shown")
     parser.add_argument("--fps", type=int, default=10)
     parser.add_argument("--width", type=int, default=1280)

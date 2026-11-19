@@ -34,5 +34,5 @@ class RTMPServer:
                 ok, frame = cap.read()
                 if not ok:
                     break
-                self.framebuffer.set_frame(frame)
+                self.framebuffer.set_frame(frame,self.fps)
             cap.release()

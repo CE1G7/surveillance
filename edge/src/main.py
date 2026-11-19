@@ -1,14 +1,12 @@
 from framebuffer import FrameBuffer
 from inference import Recognize
 from worker import Worker
-from EventManager import EventManager
 from streaming import RTMPServer
 def main():
-    frame_buffer = FrameBuffer(None)
+    frame_buffer = FrameBuffer(24,30)
     rtmp_server = RTMPServer(frame_buffer)
     recognizer = Recognize()
-    event_manager = EventManager()
-    worker = Worker(recognizer=recognizer,framebuffer=frame_buffer, eventmanager=event_manager)
+    worker = Worker(recognizer=recognizer,framebuffer=frame_buffer)
     rtmp_server.start()
     worker.start()
     
